@@ -1,0 +1,58 @@
+<!-- views/jobs.ejs -->
+<!-- Params: jobs, token -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link href='./web_modules/mapbox-gl/dist/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="./web_modules/bulma/css/bulma.css">
+    
+    <script type="module" src="./web_modules/alpinejs.js"></script>
+    
+    <!-- http://www.managerjs.com/blog/2015/05/will-ejs-escape-save-me-from-xss-sorta/ -->
+    <meta name="jobs" content="<%= JSON.stringify(jobs) %>">
+    <meta name="token" content="<%= JSON.stringify(token) %>">
+    <script type="module">
+        import renderMap from './client/map.js';
+
+        const getMetaParam = (name) => (
+            JSON.parse(document.querySelector(`meta[name="${name}"]`)?.getAttribute('content'))
+        );
+        const jobs = getMetaParam('jobs');
+        const token = getMetaParam('token');
+
+        renderMap('map', jobs, token);
+
+        
+    </script>
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="columns">
+            <aside class="column menu is-one-third">
+                <ul class="menu-list">
+                    <% jobs.forEach((job) => { %>
+                    <li>
+                        <a href=<%= job.redirect_url %> class="panel-block">
+                            <h3 class="title is-5"><%= job.title %>:</h3>
+                            <p class="subtitle is-5"><%= job.company %></p>
+                        </a>
+                    </li>
+                    <% }) %>
+                </ul>
+            </aside>
+            <div id="map" style="height: 500px;" class="column is-two-thirds">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

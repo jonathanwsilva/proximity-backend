@@ -1,0 +1,50 @@
+{
+  "name": "proximity-backend",
+  "version": "0.0.0",
+  "description": "API code for proximity",
+  "main": "build/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "dev": "tsc && concurrently \"tsc -w\" \"nodemon --watch build build/server.js\""
+  },
+  "author": "Jon Silva",
+  "license": "ISC",
+  "dependencies": {
+    "@types/leaflet": "^1.5.12",
+    "alpinejs": "^2.3.1",
+    "bulma": "^0.8.2",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "fp-ts": "^2.6.0",
+    "io-ts": "^2.2.2",
+    "leaflet": "^1.6.0",
+    "mapbox-gl": "^1.10.0",
+    "node-fetch": "^2.6.0",
+    "query-string": "^6.12.1",
+    "ramda": "^0.27.0",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.6",
+    "@types/node": "^13.13.4",
+    "@types/node-fetch": "^2.5.7",
+    "@types/ramda": "^0.27.4",
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.3",
+    "snowpack": "^1.7.1",
+    "tsc-watch": "^4.2.3"
+  },
+  "snowpack": {
+    "webDependencies": [
+      "alpinejs",
+      "bulma/css/bulma.css",
+      "mapbox-gl/dist/mapbox-gl.css"
+    ],
+    "installOptions": {
+      "include": "client/*.js"
+    }
+  }
+}
